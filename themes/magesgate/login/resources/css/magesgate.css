@@ -1,0 +1,515 @@
+/**
+ * Magesgate — fantasy / arcane Keycloak login theme.
+ * Typography: Cinzel (titles), Cormorant Garamond (body). Palette: void violet, ritual gold, moon-teal.
+ */
+
+.magesgate-login {
+  --mg-void: #06040d;
+  --mg-abyss: #0e0818;
+  --mg-deep: #160d24;
+  --mg-panel: rgba(18, 10, 32, 0.92);
+  --mg-panel-edge: rgba(32, 18, 52, 0.98);
+  --mg-gold: #c9a227;
+  --mg-gold-bright: #e8c547;
+  --mg-gold-dim: #8a7020;
+  --mg-arcane: #a78bfa;
+  --mg-arcane-dim: #6d4bb8;
+  --mg-moon: #5eead4;
+  --mg-moon-dim: #2d9b8a;
+  --mg-text: #ede4f7;
+  --mg-text-soft: #b8a8c9;
+  --mg-danger: #f472b6;
+  --mg-radius-main: 6px;
+  --mg-radius-card: 14px;
+  --mg-font-display: "Cinzel", "Palatino Linotype", serif;
+  --mg-font-body: "Cormorant Garamond", "Georgia", serif;
+}
+
+.magesgate-body,
+.magesgate-page {
+  font-family: var(--mg-font-body);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--mg-text);
+  letter-spacing: 0.02em;
+  min-height: 100vh;
+  background: var(--mg-void);
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% -30%, rgba(123, 94, 200, 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 50%, rgba(94, 234, 212, 0.06), transparent 45%),
+    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(201, 162, 39, 0.08), transparent 50%),
+    linear-gradient(180deg, var(--mg-abyss) 0%, var(--mg-void) 45%, #030208 100%);
+  background-attachment: fixed;
+}
+
+.magesgate-page {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Atmospheric veil */
+.magesgate-veil {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 120% 100% at 50% 100%, transparent 40%, rgba(6, 4, 13, 0.85) 100%),
+    linear-gradient(105deg, rgba(22, 13, 36, 0.4) 0%, transparent 35%, transparent 65%, rgba(13, 8, 28, 0.45) 100%);
+  opacity: 1;
+}
+
+/* Starfield (CSS-only) */
+.magesgate-stars {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 73% 12%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1px 1px at 88% 44%, rgba(232, 197, 71, 0.4), transparent),
+    radial-gradient(1px 1px at 25% 68%, rgba(94, 234, 212, 0.3), transparent),
+    radial-gradient(1px 1px at 45% 35%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 62% 78%, rgba(255, 255, 255, 0.18), transparent),
+    radial-gradient(1.5px 1.5px at 15% 90%, rgba(167, 139, 250, 0.45), transparent),
+    radial-gradient(1px 1px at 92% 88%, rgba(255, 255, 255, 0.22), transparent);
+  background-size: 100% 100%;
+  opacity: 0.55;
+}
+
+.magesgate-page > #kc-header,
+.magesgate-page > .card-pf {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Header / portal sigil --- */
+#kc-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.magesgate-header-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem 1rem;
+  border-radius: var(--mg-radius-main);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.magesgate-header-brand:hover,
+.magesgate-header-brand:focus-visible {
+  filter: drop-shadow(0 0 18px rgba(167, 139, 250, 0.35));
+  outline: none;
+}
+
+.magesgate-header__sigil {
+  margin-bottom: 0.25rem;
+  animation: magesgate-portal-breathe 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magesgate-header__sigil {
+    animation: none;
+  }
+}
+
+@keyframes magesgate-portal-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 12px rgba(94, 234, 212, 0.15));
+  }
+  50% {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 22px rgba(167, 139, 250, 0.35));
+  }
+}
+
+.magesgate-portal-art {
+  display: block;
+  width: min(220px, 72vw);
+  height: auto;
+  margin: 0 auto;
+}
+
+.magesgate-header__title {
+  font-family: var(--mg-font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--mg-gold-bright) 0%, #f0e6a8 25%, var(--mg-gold) 50%, var(--mg-arcane) 85%, var(--mg-moon) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 24px rgba(201, 162, 39, 0.25));
+  line-height: 1.2;
+  margin-top: 0.35rem;
+}
+
+.magesgate-header__subtitle {
+  font-family: var(--mg-font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--mg-text-soft);
+  letter-spacing: 0.12em;
+  margin-top: 0.35rem;
+  opacity: 0.92;
+}
+
+/* --- Grimoire card --- */
+.magesgate-page .card-pf {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2.25rem 2rem 1.75rem;
+  border-radius: var(--mg-radius-card);
+  background: linear-gradient(155deg, var(--mg-panel) 0%, var(--mg-panel-edge) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(123, 94, 200, 0.12),
+    0 0 48px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  overflow: visible;
+}
+
+/* Ornate corner accents */
+.magesgate-page .card-pf::before,
+.magesgate-page .card-pf::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.magesgate-page .card-pf::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 4px 0 0 0;
+  box-shadow: -1px -1px 12px rgba(201, 162, 39, 0.15);
+}
+
+.magesgate-page .card-pf::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 4px 0;
+  box-shadow: 1px 1px 12px rgba(94, 234, 212, 0.12);
+}
+
+@media (max-width: 480px) {
+  .magesgate-page .card-pf {
+    padding: 1.75rem 1.35rem 1.5rem;
+    margin: 0 0.65rem;
+  }
+}
+
+#kc-page-title {
+  font-family: var(--mg-font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--mg-text);
+  margin-top: 0.2rem;
+  margin-bottom: 1.1rem;
+  text-align: center;
+}
+
+/* --- Locale --- */
+#kc-locale {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+}
+
+.magesgate-page #kc-locale .menu-button-links button,
+.magesgate-page #kc-locale a {
+  color: var(--mg-text-soft) !important;
+  font-family: var(--mg-font-body);
+  font-size: 0.95rem;
+  border-radius: 4px;
+}
+
+.magesgate-page #kc-locale .menu-button-links button:hover,
+.magesgate-page #kc-locale a:hover {
+  color: var(--mg-moon) !important;
+  background: rgba(94, 234, 212, 0.08);
+}
+
+/* --- Labels & inputs --- */
+.magesgate-page .pf-c-form__label-text {
+  font-family: var(--mg-font-body);
+  color: var(--mg-text-soft);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.magesgate-page .pf-c-form-control {
+  font-family: var(--mg-font-body) !important;
+  font-size: 1.05rem !important;
+  background: rgba(8, 5, 18, 0.85) !important;
+  border: 1px solid rgba(123, 94, 200, 0.28) !important;
+  color: var(--mg-text) !important;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.magesgate-page .pf-c-form-control:hover {
+  border-color: rgba(201, 162, 39, 0.35) !important;
+}
+
+.magesgate-page .pf-c-form-control:focus {
+  border-color: var(--mg-gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18), 0 0 20px rgba(94, 234, 212, 0.08) !important;
+}
+
+.magesgate-page .has-error .pf-c-form-control {
+  border-color: var(--mg-danger) !important;
+}
+
+/* Password + visibility: single dark control, no PatternFly light ring */
+.magesgate-page .pf-c-input-group {
+  --pf-global--BorderColor--100: rgba(123, 94, 200, 0.35);
+  --pf-global--BorderColor--200: rgba(123, 94, 200, 0.35);
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  border: 1px solid rgba(123, 94, 200, 0.32);
+  border-radius: 8px;
+  background: rgba(8, 5, 18, 0.85);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.magesgate-page .pf-c-input-group .pf-c-form-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control {
+  --pf-c-button--after--BorderWidth: 0 !important;
+  --pf-c-button--after--BorderColor: transparent !important;
+  flex-shrink: 0;
+  align-self: stretch;
+  border: none !important;
+  border-left: 1px solid rgba(123, 94, 200, 0.28) !important;
+  border-radius: 0 !important;
+  background: rgba(8, 5, 18, 0.85) !important;
+  color: var(--mg-text-soft) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:hover {
+  background: rgba(32, 18, 52, 0.95) !important;
+  color: var(--mg-moon) !important;
+}
+
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:focus,
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control::after,
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:hover::after,
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:focus::after,
+.magesgate-page .pf-c-input-group .pf-c-button.pf-m-control:active::after {
+  display: none !important;
+  border: none !important;
+}
+
+.magesgate-page .pf-c-input-group button[data-password-toggle]::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.magesgate-page .pf-c-input-group:focus-within {
+  border-color: var(--mg-gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+}
+
+.magesgate-page .pf-c-input-group:focus-within .pf-c-button.pf-m-control {
+  border-left-color: var(--mg-gold) !important;
+}
+
+/* --- Primary action (ritual seal) --- */
+.magesgate-page .pf-c-button.pf-m-primary {
+  font-family: var(--mg-font-display) !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  background: linear-gradient(180deg, #d4af37 0%, var(--mg-gold) 35%, var(--mg-gold-dim) 100%) !important;
+  border: 1px solid rgba(232, 197, 71, 0.5) !important;
+  color: #1a0a12 !important;
+  border-radius: 8px;
+  padding: 0.65rem 1.2rem;
+  box-shadow:
+    0 2px 12px rgba(201, 162, 39, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.magesgate-page .pf-c-button.pf-m-primary:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    0 4px 28px rgba(201, 162, 39, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.magesgate-page .pf-c-button.pf-m-primary:active {
+  transform: translateY(0);
+}
+
+.magesgate-page .pf-c-button.pf-m-control,
+.magesgate-page .pf-c-button.pf-m-secondary {
+  font-family: var(--mg-font-body) !important;
+  background: rgba(32, 18, 52, 0.9) !important;
+  border: 1px solid rgba(123, 94, 200, 0.35) !important;
+  color: var(--mg-text) !important;
+  border-radius: 8px;
+}
+
+.magesgate-page .pf-c-button.pf-m-control:hover,
+.magesgate-page .pf-c-button.pf-m-secondary:hover {
+  border-color: var(--mg-moon-dim) !important;
+  color: var(--mg-moon) !important;
+}
+
+/* Social */
+.magesgate-page .kc-social-item {
+  border-radius: 8px !important;
+  border: 1px solid rgba(123, 94, 200, 0.25) !important;
+  background: rgba(8, 5, 18, 0.75) !important;
+  font-family: var(--mg-font-body) !important;
+}
+
+.magesgate-page .kc-social-item:hover {
+  border-color: rgba(201, 162, 39, 0.4) !important;
+  background: rgba(32, 18, 52, 0.85) !important;
+}
+
+/* Alerts */
+.magesgate-page .pf-c-alert {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-family: var(--mg-font-body);
+}
+
+.magesgate-page .pf-c-alert.pf-m-success {
+  --pf-c-alert--BackgroundColor: rgba(94, 234, 212, 0.1);
+  border-color: rgba(94, 234, 212, 0.35);
+  color: var(--mg-text);
+}
+
+.magesgate-page .pf-c-alert.pf-m-danger {
+  --pf-c-alert--BackgroundColor: rgba(244, 114, 182, 0.1);
+  border-color: rgba(244, 114, 182, 0.4);
+}
+
+.magesgate-page .pf-c-alert.pf-m-warning {
+  --pf-c-alert--BackgroundColor: rgba(201, 162, 39, 0.12);
+  border-color: rgba(201, 162, 39, 0.35);
+}
+
+.magesgate-page .pf-c-alert.pf-m-info {
+  --pf-c-alert--BackgroundColor: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+/* Links */
+.magesgate-page a {
+  color: var(--mg-moon);
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.magesgate-page a:hover {
+  color: #9ffcec;
+  text-shadow: 0 0 12px rgba(94, 234, 212, 0.35);
+}
+
+.magesgate-page #kc-form-options a,
+.magesgate-page #kc-registration a,
+.magesgate-page #try-another-way {
+  font-weight: 600;
+}
+
+#kc-username label {
+  font-family: var(--mg-font-body);
+  color: var(--mg-text);
+}
+
+/* Footer */
+.magesgate-login-footer {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  text-align: center;
+}
+
+.magesgate-login-footer__rune {
+  height: 1px;
+  max-width: 200px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 39, 0.5) 20%,
+    rgba(167, 139, 250, 0.6) 50%,
+    rgba(94, 234, 212, 0.45) 80%,
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.25);
+}
+
+.magesgate-login-footer__text {
+  margin: 0;
+  font-family: var(--mg-font-body);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--mg-text-soft);
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  max-width: 26rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* OTP / select-auth */
+.magesgate-page .pf-c-tile {
+  background: rgba(8, 5, 18, 0.85);
+  border: 1px solid rgba(123, 94, 200, 0.28);
+  border-radius: 8px;
+}
+
+.magesgate-page .select-auth-box-parent {
+  border-color: rgba(123, 94, 200, 0.3) !important;
+  border-radius: 8px;
+}
+
+.magesgate-page .select-auth-box-parent:hover {
+  border-color: var(--mg-gold) !important;
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.2);
+}

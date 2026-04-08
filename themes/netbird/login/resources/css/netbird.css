@@ -1,0 +1,404 @@
+/**
+ * NetBird Keycloak login — visual tokens from netbirdio/dashboard (Tailwind theme):
+ * nb-gray surface #181A1D, accent netbird #f68330, nb-blue #31e4f5.
+ * PatternFly (parent=keycloak) structure preserved; this file overrides colors/spacing.
+ */
+
+.netbird-login {
+  /* Dashboard-aligned palette (see tailwind.config.ts in netbirdio/dashboard) */
+  --nb-bg-deep: #16181b;
+  --nb-bg: #181a1d;
+  --nb-surface: #1c1e21;
+  --nb-surface-raised: #25282c;
+  --nb-border: #3f444b;
+  --nb-border-subtle: #2e3238;
+  --nb-text: #e4e7e9;
+  --nb-text-muted: #a3adb5;
+  --nb-orange: #f68330;
+  --nb-orange-mid: #f46d1b;
+  --nb-orange-deep: #e55311;
+  --nb-cyan: #31e4f5;
+  --nb-cyan-muted: #039cb7;
+  --nb-danger: #f05252;
+  --nb-radius: 12px;
+  --nb-shadow: 0 24px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --nb-font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.netbird-body,
+.netbird-login-page {
+  font-family: var(--nb-font);
+  color: var(--nb-text);
+  min-height: 100vh;
+  background-color: var(--nb-bg);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 100% -20%, rgba(246, 131, 48, 0.14), transparent 50%),
+    radial-gradient(ellipse 90% 60% at -10% 110%, rgba(49, 228, 245, 0.1), transparent 45%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(37, 40, 44, 0.5), transparent 70%),
+    linear-gradient(180deg, var(--nb-bg-deep) 0%, var(--nb-bg) 40%, #141518 100%);
+  background-attachment: fixed;
+}
+
+/* Subtle mesh / grid (dashboard “control plane” feel) */
+.netbird-login-page::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.netbird-login-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Header / logo --- */
+#kc-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.netbird-header-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.netbird-header-brand:hover,
+.netbird-header-brand:focus-visible {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 0 1px rgba(49, 228, 245, 0.15);
+  outline: none;
+}
+
+.netbird-header-logo {
+  display: block;
+  width: min(200px, 70vw);
+  height: auto;
+}
+
+/* --- Card (PatternFly .card-pf) --- */
+.netbird-login-page .card-pf {
+  background: var(--nb-surface);
+  border: 1px solid var(--nb-border-subtle);
+  border-radius: var(--nb-radius);
+  box-shadow: var(--nb-shadow);
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 2rem 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .netbird-login-page .card-pf {
+    padding: 1.5rem 1.25rem 1.25rem;
+    margin: 0 0.75rem;
+  }
+}
+
+/* Page title inside card */
+#kc-page-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--nb-text);
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* --- Locale --- */
+#kc-locale {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.netbird-login-page #kc-locale .menu-button-links button,
+.netbird-login-page #kc-locale a {
+  color: var(--nb-text-muted) !important;
+  font-size: 0.8125rem;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+}
+
+.netbird-login-page #kc-locale .menu-button-links button:hover,
+.netbird-login-page #kc-locale a:hover {
+  color: var(--nb-cyan) !important;
+  background: rgba(49, 228, 245, 0.08);
+}
+
+/* --- Form labels & inputs --- */
+.netbird-login-page .pf-c-form__label-text {
+  color: var(--nb-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.netbird-login-page .pf-c-form-control {
+  background: var(--nb-bg-deep) !important;
+  border: 1px solid var(--nb-border) !important;
+  color: var(--nb-text) !important;
+  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.netbird-login-page .pf-c-form-control:hover {
+  border-color: #616e79 !important;
+}
+
+.netbird-login-page .pf-c-form-control:focus {
+  border-color: var(--nb-orange) !important;
+  box-shadow: 0 0 0 3px rgba(246, 131, 48, 0.2) !important;
+}
+
+.netbird-login-page .has-error .pf-c-form-control {
+  border-color: var(--nb-danger) !important;
+}
+
+/* Password field + visibility toggle: PatternFly input-group uses light borders (#f0f0f0) — unify as one dark control */
+.netbird-login-page .pf-c-input-group {
+  --pf-global--BorderColor--100: var(--nb-border);
+  --pf-global--BorderColor--200: var(--nb-border);
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  border: 1px solid var(--nb-border);
+  border-radius: 8px;
+  background: var(--nb-bg-deep);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.netbird-login-page .pf-c-input-group .pf-c-form-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control {
+  --pf-c-button--after--BorderWidth: 0 !important;
+  --pf-c-button--after--BorderColor: transparent !important;
+  flex-shrink: 0;
+  align-self: stretch;
+  border: none !important;
+  border-left: 1px solid var(--nb-border) !important;
+  border-radius: 0 !important;
+  background: var(--nb-bg-deep) !important;
+  color: var(--nb-text-muted) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:hover {
+  background: var(--nb-surface-raised) !important;
+  color: var(--nb-cyan) !important;
+}
+
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:focus,
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* PatternFly draws a full light border on .pf-c-button via ::after — remove it on the password toggle */
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control::after {
+  display: none !important;
+}
+
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:hover::after,
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:focus::after,
+.netbird-login-page .pf-c-input-group .pf-c-button.pf-m-control:active::after {
+  display: none !important;
+  border: none !important;
+}
+
+.netbird-login-page .pf-c-input-group button[data-password-toggle]::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.netbird-login-page .pf-c-input-group:focus-within {
+  border-color: var(--nb-orange);
+  box-shadow: 0 0 0 3px rgba(246, 131, 48, 0.2);
+}
+
+.netbird-login-page .pf-c-input-group:focus-within .pf-c-button.pf-m-control {
+  border-left-color: var(--nb-orange) !important;
+}
+
+/* --- Buttons --- */
+.netbird-login-page .pf-c-button.pf-m-primary {
+  background: linear-gradient(180deg, var(--nb-orange) 0%, var(--nb-orange-mid) 100%) !important;
+  border: none !important;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.625rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(246, 131, 48, 0.35);
+  transition: filter 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.netbird-login-page .pf-c-button.pf-m-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 4px 16px rgba(246, 131, 48, 0.45);
+}
+
+.netbird-login-page .pf-c-button.pf-m-primary:active {
+  transform: translateY(1px);
+}
+
+.netbird-login-page .pf-c-button.pf-m-control,
+.netbird-login-page .pf-c-button.pf-m-secondary {
+  background: var(--nb-surface-raised) !important;
+  border: 1px solid var(--nb-border) !important;
+  color: var(--nb-text) !important;
+  border-radius: 8px;
+}
+
+.netbird-login-page .pf-c-button.pf-m-control:hover {
+  border-color: var(--nb-cyan-muted) !important;
+  color: var(--nb-cyan) !important;
+}
+
+/* Social IdP */
+.netbird-login-page .kc-social-item {
+  border-radius: 8px !important;
+  border: 1px solid var(--nb-border) !important;
+  background: var(--nb-bg-deep) !important;
+}
+
+.netbird-login-page .kc-social-item:hover {
+  border-color: var(--nb-text-muted) !important;
+  background: var(--nb-surface-raised) !important;
+}
+
+/* --- Alerts --- */
+.netbird-login-page .pf-c-alert.pf-m-success {
+  --pf-c-alert--BackgroundColor: rgba(14, 159, 110, 0.12);
+  border-color: rgba(49, 228, 245, 0.35);
+}
+
+.netbird-login-page .pf-c-alert.pf-m-danger {
+  --pf-c-alert--BackgroundColor: rgba(240, 82, 82, 0.1);
+  border-color: rgba(240, 82, 82, 0.35);
+}
+
+.netbird-login-page .pf-c-alert.pf-m-warning {
+  --pf-c-alert--BackgroundColor: rgba(250, 182, 119, 0.1);
+}
+
+.netbird-login-page .pf-c-alert.pf-m-info {
+  --pf-c-alert--BackgroundColor: rgba(49, 228, 245, 0.08);
+  border-color: rgba(49, 228, 245, 0.25);
+}
+
+.netbird-login-page .pf-c-alert {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* --- Links --- */
+.netbird-login-page a {
+  color: var(--nb-cyan);
+}
+
+.netbird-login-page a:hover {
+  color: #63f2fd;
+}
+
+.netbird-login-page #kc-form-options a,
+.netbird-login-page #kc-registration a,
+.netbird-login-page #try-another-way {
+  color: var(--nb-cyan);
+  font-weight: 500;
+}
+
+/* Username chip when step-up */
+#kc-username label {
+  color: var(--nb-text);
+}
+
+/* --- Footer --- */
+.netbird-login-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nb-border-subtle);
+  text-align: center;
+}
+
+.netbird-login-footer__text {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--nb-text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* --- OTP tiles & select-auth (if used) --- */
+.netbird-login-page .pf-c-tile {
+  background: var(--nb-bg-deep);
+  border: 1px solid var(--nb-border);
+  border-radius: 8px;
+}
+
+.netbird-login-page .select-auth-box-parent {
+  border-color: var(--nb-border) !important;
+  border-radius: 8px;
+}
+
+.netbird-login-page .select-auth-box-parent:hover {
+  border-color: var(--nb-orange) !important;
+  box-shadow: 0 0 0 1px rgba(246, 131, 48, 0.2);
+}
+
+/* --- Light fallback (docs.netbird.io–style readability) --- */
+@media (prefers-color-scheme: light) {
+  .netbird-login {
+    --nb-bg-deep: #f4f6f7;
+    --nb-bg: #f9fafb;
+    --nb-surface: #ffffff;
+    --nb-surface-raised: #f3f4f6;
+    --nb-border: #d1d5db;
+    --nb-border-subtle: #e5e7eb;
+    --nb-text: #1f2937;
+    --nb-text-muted: #6b7280;
+  }
+
+  .netbird-body,
+  .netbird-login-page {
+    background-image:
+      radial-gradient(ellipse 100% 80% at 100% 0%, rgba(246, 131, 48, 0.08), transparent 50%),
+      radial-gradient(ellipse 80% 50% at 0% 100%, rgba(49, 228, 245, 0.08), transparent 45%),
+      linear-gradient(180deg, #ffffff 0%, var(--nb-bg) 100%);
+  }
+
+  .netbird-login-page::before {
+    opacity: 0.2;
+  }
+
+  /* Wordmark SVG uses light gray text — keep a dark brand chip so the asset stays legible */
+  .netbird-header-brand {
+    background: #181a1d;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .netbird-header-brand:hover,
+  .netbird-header-brand:focus-visible {
+    background: #1f2124;
+    box-shadow: 0 0 0 1px rgba(49, 228, 245, 0.35);
+  }
+}

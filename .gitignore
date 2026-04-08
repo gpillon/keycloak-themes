@@ -1,0 +1,5 @@
+dist/
+.env
+*.jar
+
+deploy/k8s/migration-backups/

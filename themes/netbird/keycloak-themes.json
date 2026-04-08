@@ -1,0 +1,8 @@
+{
+  "themes": [
+    {
+      "name": "netbird",
+      "types": ["login", "email"]
+    }
+  ]
+}

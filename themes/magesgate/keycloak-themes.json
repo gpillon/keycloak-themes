@@ -1,0 +1,8 @@
+{
+  "themes": [
+    {
+      "name": "magesgate",
+      "types": ["login", "email"]
+    }
+  ]
+}

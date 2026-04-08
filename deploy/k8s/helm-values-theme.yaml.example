@@ -1,0 +1,20 @@
+# Helm values fragment: mount one Keycloak theme JAR from a ConfigMap (CloudPirates/upstream Keycloak chart).
+# Replace <theme> with your theme id (same as themes/<theme>/ directory name).
+#
+# 1. Create the ConfigMap (or use scripts/deploy-k8s.sh which builds the JAR and applies it):
+#    kubectl create configmap keycloak-theme-<theme> \
+#      --from-file=keycloak-theme-<theme>.jar=dist/keycloak-theme-<theme>.jar -n keycloak --dry-run=client -o yaml | kubectl apply -f -
+#
+# 2. Merge this fragment into your CloudPirates Keycloak values, then sync/upgrade.
+#    preserveThemes/preserveProviders avoid masking providers/themes bundled in the image.
+#
+preserveThemes: true
+preserveProviders: true
+extraVolumes:
+  - name: keycloak-theme-<theme>-jar
+    configMap:
+      name: keycloak-theme-<theme>
+extraVolumeMounts:
+  - name: keycloak-theme-<theme>-jar
+    mountPath: /opt/keycloak/providers/keycloak-theme-<theme>.jar
+    subPath: keycloak-theme-<theme>.jar
